@@ -12,7 +12,7 @@ import java.util.List;
 public record DadosDetalhamentoDrone(Long id,
                                      String modelo,
                                      Long numeroSerie,
-                                     List<LicencaVoo> lincecaVoo,
+                                     List<LicencaVoo> licencaVoo,
                                      List<HistoricoVoo> historicoVoo,
                                      double horasVoo,
                                      String capacidadeCarga,

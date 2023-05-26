@@ -1,4 +1,4 @@
-package br.com.fiap.drones;
+package br.com.fiap.drones.repository;
 
 import br.com.fiap.drones.model.Drone;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,6 +1,6 @@
 package br.com.fiap.drones.service;
 
-import br.com.fiap.drones.DroneRepository;
+import br.com.fiap.drones.repository.DroneRepository;
 import br.com.fiap.drones.dto.DadosAtualizacaoDrone;
 import br.com.fiap.drones.dto.DadosCadastroDrones;
 import br.com.fiap.drones.dto.DadosDetalhamentoDrone;
@@ -44,8 +44,8 @@ public class DroneService {
             droneEditado.setNumeroSerie(dados.numeroSerie());
         }
 
-        if (dados.lincecaVoo() != null) {
-            droneEditado.setLicencaVoo(dados.lincecaVoo());
+        if (dados.licencaVoo() != null) {
+            droneEditado.setLicencaVoo(dados.licencaVoo());
         }
 
         if (dados.historicoVoo() != null) {
