@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Entity(name = "Telemetria")
+@Entity
 @Table(name = "Telemetrias")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,8 +18,6 @@ public class Telemetria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
-    private List<Drone> drone;
     private double latitude;
     private double longitude;
     private double altitude;
