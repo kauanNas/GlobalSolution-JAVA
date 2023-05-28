@@ -2,6 +2,7 @@ package br.com.fiap.drones.controller;
 
 import br.com.fiap.drones.dto.DadosAtualizacaoDrone;
 import br.com.fiap.drones.dto.DadosCadastroDrones;
+import br.com.fiap.drones.dto.DadosCadastroLicenca;
 import br.com.fiap.drones.service.DroneService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,14 @@ public class DroneController {
     public ResponseEntity detalhar(@PathVariable Long id){
         var dto = service.especificarDrone(id);
         return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping("/{id}")
+    @Transactional
+    public ResponseEntity cadastrarLicenca(@RequestBody @Valid DadosCadastroLicenca dados, UriComponentsBuilder uriBuilder){
+        var dto = service.adicionarLicencaDrone(dados);
+        var uri = uriBuilder.path("/drones/{id}").buildAndExpand(dto.id()).toUri();
+        return ResponseEntity.created(uri).body(dto);
     }
 
 }

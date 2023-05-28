@@ -15,7 +15,7 @@ public record DadosCadastroDrones(
         String modelo,
         @NotNull
         Long numeroSerie,
-       git sta
+
         List<LicencaVoo> licencaVoo,
 
         List<HistoricoVoo> historicoVoo,

@@ -1,11 +1,11 @@
 package br.com.fiap.drones.service;
 
+import br.com.fiap.drones.dto.DadosCadastroLicenca;
+import br.com.fiap.drones.dto.*;
+import br.com.fiap.drones.model.LicencaVoo;
 import br.com.fiap.drones.repository.DroneRepository;
-import br.com.fiap.drones.dto.DadosAtualizacaoDrone;
-import br.com.fiap.drones.dto.DadosCadastroDrones;
-import br.com.fiap.drones.dto.DadosDetalhamentoDrone;
-import br.com.fiap.drones.dto.DadosListagemDrone;
 import br.com.fiap.drones.model.Drone;
+import br.com.fiap.drones.repository.LicencaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,21 +15,25 @@ import org.springframework.stereotype.Service;
 public class DroneService {
 
     @Autowired
-    private DroneRepository repository;
+    private DroneRepository droneRepository;
+
+    @Autowired
+    private LicencaRepository licencaRepository;
+
     public DadosDetalhamentoDrone adicionarDrone(DadosCadastroDrones dados) {
         var drone = new Drone(dados.nome(), dados.modelo(), dados.numeroSerie(), dados.licencaVoo(),
                 dados.historicoVoo(), dados.capacidadeCarga(), dados.capacidadeBateria(), dados.telemetrias());
-        repository.save(drone);
+        droneRepository.save(drone);
         return new DadosDetalhamentoDrone(drone);
     }
 
-    public Page<DadosListagemDrone> buscarDrone(Pageable paginacao) {
-        var page = repository.findAll(paginacao).map(DadosListagemDrone::new);
+    public Page<DadosCadastroListagemDrone> buscarDrone(Pageable paginacao) {
+        var page = droneRepository.findAll(paginacao).map(DadosCadastroListagemDrone::new);
         return page;
     }
 
     public DadosDetalhamentoDrone editarDrone(DadosAtualizacaoDrone dados) {
-        var drone = repository.getReferenceById(dados.id());
+        var drone = droneRepository.getReferenceById(dados.id());
         Drone droneEditado = drone;
 
         if (dados.nome() != null) {
@@ -69,12 +73,17 @@ public class DroneService {
     }
 
     public void removerDrone(Long id) {
-        repository.deleteById(id);
+        droneRepository.deleteById(id);
     }
 
     public DadosDetalhamentoDrone especificarDrone(Long id){
-        var drone = repository.getReferenceById(id);
+        var drone = droneRepository.getReferenceById(id);
         return new DadosDetalhamentoDrone(drone);
     }
 
+    public DadosDetalhamentoLicencaDrone adicionarLicencaDrone(DadosCadastroLicenca dados) {
+        var licenca = new LicencaVoo(dados.numeroLicenca(), dados.dataEmissao(), dados.validade());
+        licencaRepository.save(licenca);
+        return new DadosDetalhamentoLicencaDrone(licenca);
+    }
 }

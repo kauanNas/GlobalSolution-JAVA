@@ -19,12 +19,13 @@ public class LicencaVoo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
     private Long numeroLicenca;
-    @NotNull
     private LocalDate dataEmissao;
-    @NotNull
     private LocalDate validade;
 
-
+    public LicencaVoo(Long numeroLicenca, LocalDate dataEmissao, LocalDate validade) {
+        this.numeroLicenca = numeroLicenca;
+        this.dataEmissao = dataEmissao;
+        this.validade = validade;
+    }
 }
