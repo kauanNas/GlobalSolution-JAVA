@@ -18,12 +18,10 @@ public record DadosCadastroDrones(
 
         List<LicencaVoo> licencaVoo,
 
-        List<HistoricoVoo> historicoVoo,
         @NotBlank
         String capacidadeCarga,
         @NotBlank
-        String capacidadeBateria,
+        String capacidadeBateria
 
-        List<Telemetria> telemetrias
 ) {
 }

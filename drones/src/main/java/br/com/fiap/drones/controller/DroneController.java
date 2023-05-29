@@ -57,10 +57,9 @@ public class DroneController {
 
     @PostMapping("/{id}")
     @Transactional
-    public ResponseEntity cadastrarLicenca(@RequestBody @Valid DadosCadastroLicenca dados, UriComponentsBuilder uriBuilder){
-        var dto = service.adicionarLicencaDrone(dados);
-        var uri = uriBuilder.path("/drones/{id}").buildAndExpand(dto.id()).toUri();
-        return ResponseEntity.created(uri).body(dto);
+    public ResponseEntity cadastrarLicenca(@RequestBody @Valid DadosCadastroLicenca dados, @PathVariable Long id){
+        var dto = service.adicionarLicencaDrone(dados, id);
+        return ResponseEntity.ok(dto);
     }
 
 }

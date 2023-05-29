@@ -34,20 +34,19 @@ public class Drone {
     @JoinColumn(name = "drone_id", nullable = true)
     private List<Telemetria> telemetrias;
 
-    public void definirHorasVoo(){
+    public double definirHorasVoo(){
             for(HistoricoVoo historico : historicoVoo){
-                horasVoo += historico.getDuracao();
+                this.horasVoo += (historico.getDuracaoMinutos()/60);
             }
+            return horasVoo;
     }
 
-    public Drone(String nome, String modelo, Long numeroSerie, List<LicencaVoo> licencaVoo, List<HistoricoVoo> historicoVoo, String capacidadeCarga, String capacidadeBateria, List<Telemetria> telemetrias) {
+    public Drone(String nome, String modelo, Long numeroSerie, List<LicencaVoo> licencaVoo, String capacidadeCarga, String capacidadeBateria) {
         this.nome = nome;
         this.modelo = modelo;
         this.numeroSerie = numeroSerie;
         this.licencaVoo = licencaVoo;
-        this.historicoVoo = historicoVoo;
         this.capacidadeCarga = capacidadeCarga;
         this.capacidadeBateria = capacidadeBateria;
-        this.telemetrias = telemetrias;
     }
 }

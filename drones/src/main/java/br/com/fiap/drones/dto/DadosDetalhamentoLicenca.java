@@ -1,16 +1,18 @@
 package br.com.fiap.drones.dto;
 
 import br.com.fiap.drones.model.LicencaVoo;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record DadosDetalhamentoLicencaDrone(
+public record DadosDetalhamentoLicenca(
         Long id,
         Long numeroLicenca,
         LocalDate dataEmissao,
-        LocalDate validade) {
+        LocalDate validade
+) {
 
-    public DadosDetalhamentoLicencaDrone(LicencaVoo licencaVoo){
+    public DadosDetalhamentoLicenca(LicencaVoo licencaVoo){
         this(licencaVoo.getId(), licencaVoo.getNumeroLicenca(), licencaVoo.getDataEmissao(), licencaVoo.getValidade());
     }
 

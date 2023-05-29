@@ -5,11 +5,14 @@ import br.com.fiap.drones.dto.*;
 import br.com.fiap.drones.model.LicencaVoo;
 import br.com.fiap.drones.repository.DroneRepository;
 import br.com.fiap.drones.model.Drone;
-import br.com.fiap.drones.repository.LicencaRepository;
+import br.com.fiap.drones.repository.LicencaVooRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DroneService {
@@ -18,17 +21,18 @@ public class DroneService {
     private DroneRepository droneRepository;
 
     @Autowired
-    private LicencaRepository licencaRepository;
+    LicencaVooRepository licencaVooRepository;
+
 
     public DadosDetalhamentoDrone adicionarDrone(DadosCadastroDrones dados) {
         var drone = new Drone(dados.nome(), dados.modelo(), dados.numeroSerie(), dados.licencaVoo(),
-                dados.historicoVoo(), dados.capacidadeCarga(), dados.capacidadeBateria(), dados.telemetrias());
+                dados.capacidadeCarga(), dados.capacidadeBateria());
         droneRepository.save(drone);
         return new DadosDetalhamentoDrone(drone);
     }
 
-    public Page<DadosCadastroListagemDrone> buscarDrone(Pageable paginacao) {
-        var page = droneRepository.findAll(paginacao).map(DadosCadastroListagemDrone::new);
+    public Page<DadosListagemDrone> buscarDrone(Pageable paginacao) {
+        var page = droneRepository.findAll(paginacao).map(DadosListagemDrone::new);
         return page;
     }
 
@@ -81,9 +85,16 @@ public class DroneService {
         return new DadosDetalhamentoDrone(drone);
     }
 
-    public DadosDetalhamentoLicencaDrone adicionarLicencaDrone(DadosCadastroLicenca dados) {
+    public DadosDetalhamentoDrone adicionarLicencaDrone(DadosCadastroLicenca dados, Long id) {
+        var drone = droneRepository.getReferenceById(id);
         var licenca = new LicencaVoo(dados.numeroLicenca(), dados.dataEmissao(), dados.validade());
-        licencaRepository.save(licenca);
-        return new DadosDetalhamentoLicencaDrone(licenca);
+        licencaVooRepository.save(licenca);
+
+        List<LicencaVoo> licencaVoos = new ArrayList<>();
+        licencaVoos.add(licenca);
+        drone.setLicencaVoo(licencaVoos);
+
+        return new DadosDetalhamentoDrone(drone);
     }
+
 }
