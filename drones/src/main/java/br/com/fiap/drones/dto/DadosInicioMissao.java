@@ -12,6 +12,6 @@ public record DadosInicioMissao(
         @NotNull
         double longitudeInicioVoo,
         @NotNull
-        double altitude
+        int altitude
 ) {
 }

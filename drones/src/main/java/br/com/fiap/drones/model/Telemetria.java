@@ -18,9 +18,9 @@ public class Telemetria {
     private Long id;
     private double latitude;
     private double longitude;
-    private double altitude;
+    private int altitude;
     private double velocidade;
-    private String direcao;
+    private int direcao;
     private String tempo;
     private LocalDateTime dataHora;
 

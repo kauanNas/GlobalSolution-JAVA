@@ -30,4 +30,10 @@ public class MissaoController {
         return ResponseEntity.ok(dto);
     }
 
+    @GetMapping("/telemetria/{idDrone}/{idHistorico}")
+    public ResponseEntity buscarTelemetria(@PathVariable Long idDrone, @PathVariable Long idHistorico){
+        var dto = service.gerarTelemetria(idDrone, idHistorico);
+        return ResponseEntity.ok(dto);
+    }
+
 }

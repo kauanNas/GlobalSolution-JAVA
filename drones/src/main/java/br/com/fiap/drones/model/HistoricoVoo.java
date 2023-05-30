@@ -33,7 +33,7 @@ public class HistoricoVoo {
 
     private double longitudeFimVoo;
 
-    private double altitude;
+    private int altitude;
 
     private double velocidadeMedia;
 
@@ -43,7 +43,7 @@ public class HistoricoVoo {
         return duracaoMinutos;
     }
 
-    public HistoricoVoo(LocalDateTime dataDecolagem, double latitudeInicioVoo, double longitudeInicioVoo, double altitude) {
+    public HistoricoVoo(LocalDateTime dataDecolagem, double latitudeInicioVoo, double longitudeInicioVoo, int altitude) {
         this.dataDecolagem = dataDecolagem;
         this.latitudeInicioVoo = latitudeInicioVoo;
         this.longitudeInicioVoo = longitudeInicioVoo;

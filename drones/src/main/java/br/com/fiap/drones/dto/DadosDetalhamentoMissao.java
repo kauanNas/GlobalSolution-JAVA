@@ -10,7 +10,7 @@ public record DadosDetalhamentoMissao(
         LocalDateTime dataDecolagem,
         double latitudeInicioVoo,
         double longitudeInicioVoo,
-        double altitude,
+        int altitude,
         LocalDateTime dataAterrisagem,
         double latitudeFimVoo,
         double longitudeFimVoo,
