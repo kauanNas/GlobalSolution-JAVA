@@ -11,11 +11,10 @@ public record DadosDetalhamentoTelemetria(
         int altitude,
         double velocidade,
         int direcao,
-        String tempo,
         LocalDateTime dataHora
 ) {
     public DadosDetalhamentoTelemetria(Telemetria telemetria){
         this(telemetria.getId(), telemetria.getLatitude(), telemetria.getLongitude(), telemetria.getAltitude(),
-                telemetria.getVelocidade(), telemetria.getDirecao(), telemetria.getTempo(), telemetria.getDataHora());
+                telemetria.getVelocidade(), telemetria.getDirecao(), telemetria.getDataHora());
     }
 }

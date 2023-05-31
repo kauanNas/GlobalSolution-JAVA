@@ -61,10 +61,10 @@ public class MissaoService {
         var drone = droneRepository.getReferenceById(idDrone);
         var telemetria = new Telemetria();
         Random random = new Random();
-        DecimalFormat df = new DecimalFormat("000,000");
+        DecimalFormat df = new DecimalFormat("###,###");
         DecimalFormat decimalFormat = new DecimalFormat("#,##");
         telemetria.setLatitude(Double.parseDouble(df.format(-300.277 + (300.277 - (-300.277)) * random.nextDouble())));
-        telemetria.setLongitude(Double.parseDouble(df.format(-300.277 + (300.277 - (-300.277)) * random.nextDouble())));
+        telemetria.setLongitude((-300.277 + (300.277 - (-300.277)) * random.nextDouble()));
         telemetria.setAltitude(random.nextInt(100-0+1) + 0);
         telemetria.setVelocidade(Double.parseDouble(decimalFormat.format((Math.random() * (140 - 0) + 0)/3.6)));
         telemetria.setDirecao(random.nextInt(340-70+1) + 70);

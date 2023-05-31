@@ -6,6 +6,7 @@ import br.com.fiap.drones.service.MissaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ public class MissaoController {
     @Autowired
     private MissaoService service;
 
+    @PreAuthorize("hasRole('drone-seed')")
     @PostMapping("/inicio/{id}")
     @Transactional
     public ResponseEntity iniciarMissao(@RequestBody @Valid DadosInicioMissao dados, @PathVariable Long id){
@@ -23,6 +25,7 @@ public class MissaoController {
         return ResponseEntity.ok(dto);
     }
 
+    @PreAuthorize("hasRole('drone-seed')")
     @PostMapping("/fim/{id}")
     @Transactional
     public ResponseEntity finalizarMissao(@RequestBody @Valid DadosFimMissao dados, @PathVariable Long id){
@@ -30,6 +33,7 @@ public class MissaoController {
         return ResponseEntity.ok(dto);
     }
 
+    @PreAuthorize("hasRole('telemetria-reader')")
     @GetMapping("/telemetria/{idDrone}/{idHistorico}")
     public ResponseEntity buscarTelemetria(@PathVariable Long idDrone, @PathVariable Long idHistorico){
         var dto = service.gerarTelemetria(idDrone, idHistorico);
