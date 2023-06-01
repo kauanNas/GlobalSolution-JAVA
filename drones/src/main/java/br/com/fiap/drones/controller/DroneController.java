@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/drones")
-@PreAuthorize("hasAnyRole('drone-admin')")
+//@PreAuthorize("hasAnyRole('drone-admin')")
 public class DroneController {
 
     @Autowired
@@ -29,6 +29,11 @@ public class DroneController {
         var dto = service.adicionarDrone(dados);
         var uri = uriBuilder.path("/drones/{id}").buildAndExpand(dto.id()).toUri();
         return ResponseEntity.created(uri).body(dto);
+    }
+
+    @GetMapping("/cadastro")
+    public String carregaFormularioCadastro(){
+        return "drones/cadastro";
     }
 
     @GetMapping
