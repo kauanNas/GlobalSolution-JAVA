@@ -24,4 +24,13 @@ public class Telemetria {
     private String tempo;
     private LocalDateTime dataHora;
 
+    public Telemetria(double latitude, double longitude, int altitude, double velocidade, int direcao, String tempo, LocalDateTime dataHora) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.altitude = altitude;
+        this.velocidade = velocidade;
+        this.direcao = direcao;
+        this.tempo = tempo;
+        this.dataHora = dataHora;
+    }
 }

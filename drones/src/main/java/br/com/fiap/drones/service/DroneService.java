@@ -90,9 +90,7 @@ public class DroneService {
         var licenca = new LicencaVoo(dados.numeroLicenca(), dados.dataEmissao(), dados.validade());
         licencaVooRepository.save(licenca);
 
-        List<LicencaVoo> licencaVoos = new ArrayList<>();
-        licencaVoos.add(licenca);
-        drone.setLicencaVoo(licencaVoos);
+        drone.getLicencaVoo().add(licenca);
 
         return new DadosDetalhamentoDrone(drone);
     }

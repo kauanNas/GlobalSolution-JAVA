@@ -57,36 +57,4 @@ public class MissaoService {
         return new DadosDetalhamentoMissao(historico);
     }
 
-    public DadosDetalhamentoTelemetria gerarTelemetria(Long idDrone, Long idHistorico) {
-        var drone = droneRepository.getReferenceById(idDrone);
-        var telemetria = new Telemetria();
-        Random random = new Random();
-        DecimalFormat df = new DecimalFormat("###,###");
-        DecimalFormat decimalFormat = new DecimalFormat("#,##");
-        telemetria.setLatitude(Double.parseDouble(df.format(-300.277 + (300.277 - (-300.277)) * random.nextDouble())));
-        telemetria.setLongitude((-300.277 + (300.277 - (-300.277)) * random.nextDouble()));
-        telemetria.setAltitude(random.nextInt(100-0+1) + 0);
-        telemetria.setVelocidade(Double.parseDouble(decimalFormat.format((Math.random() * (140 - 0) + 0)/3.6)));
-        telemetria.setDirecao(random.nextInt(340-70+1) + 70);
-        telemetria.setDataHora(gerarDataHoraAleatoria(idHistorico));
-        telemetriaRepository.save(telemetria);
-        List<Telemetria> listaTelemetrias = new ArrayList<>();
-        listaTelemetrias.add(telemetria);
-        drone.setTelemetrias(listaTelemetrias);
-
-        return new DadosDetalhamentoTelemetria(telemetria);
-    }
-
-    public LocalDateTime gerarDataHoraAleatoria(Long id) {
-        var historico = historicoVooRepository.getReferenceById(id);
-        LocalDateTime dataInicial = historico.getDataDecolagem();
-        Random random = new Random();
-        long minutos = ChronoUnit.MINUTES.between(dataInicial, LocalDateTime.now());
-        long minutosAleatorios = random.nextLong() % minutos;
-        if (minutosAleatorios < 0) {
-            minutosAleatorios += minutos;
-        }
-        return dataInicial.plusMinutes(minutosAleatorios);
-    }
-
 }

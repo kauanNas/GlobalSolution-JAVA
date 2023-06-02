@@ -31,11 +31,6 @@ public class DroneController {
         return ResponseEntity.created(uri).body(dto);
     }
 
-    @GetMapping("/cadastro")
-    public String carregaFormularioCadastro(){
-        return "drones/cadastro";
-    }
-
     @GetMapping
     public ResponseEntity listar(@PageableDefault(size = 10) Pageable paginacao){
         var dto = service.buscarDrone(paginacao);
