@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listagem de Drones</title>
+</head>
+<body>
+<h1>Listagem de Drones</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Modelo</th>
+        <th>Número de Série</th>
+        <th>Licenças de Voo</th>
+        <th>Histórico de Voo</th>
+        <th>Horas de Voo</th>
+        <th>Capacidade de Carga</th>
+        <th>Capacidade da Bateria</th>
+        <th>Telemetrias</th>
+        <th>Ações</th>
+    </tr>
+
+    <tr th:each="drone : ${drones}">
+        <td th:text="${drone.id}"></td>
+        <td th:text="${drone.nome}"></td>
+        <td th:text="${drone.modelo}"></td>
+        <td th:text="${drone.numeroSerie}"></td>
+        <td>
+            <ul>
+                <li th:each="licenca : ${drone.licencaVoo}" th:text="${licenca}"></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li th:each="historico : ${drone.historicoVoo}" th:text="${historico}"></li>
+            </ul>
+        </td>
+        <td th:text="${drone.horasVoo}"></td>
+        <td th:text="${drone.capacidadeCarga}"></td>
+        <td th:text="${drone.capacidadeBateria}"></td>
+        <td>
+            <ul>
+                <li th:each="telemetria : ${drone.telemetrias}" th:text="${telemetria}"></li>
+            </ul>
+        </td>
+        <td>
+            <a th:href="@{/drones/editar/{id}(id=${drone.id})}">Editar</a>
+            <button th:attr="data-drone-id=${drone.id}" type="button" onclick="excluirDrone(this.getAttribute('data-drone-id'))">Excluir</button>
+        </td>
+
+    </tr>
+</table>
+
+<a th:href="@{/drones/home}">Novo Drone</a>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function excluirDrone(id) {
+        $.ajax({
+            url: "/drones/excluir/" + id,
+            type: "DELETE",
+            success: function() {
+                // Atualiza a página após a exclusão ser concluída
+                location.reload();
+            },
+            error: function() {
+                alert("Ocorreu um erro ao excluir o drone.");
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
