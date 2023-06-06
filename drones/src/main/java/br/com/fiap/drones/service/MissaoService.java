@@ -37,9 +37,7 @@ public class MissaoService {
         var inicioVoo = new HistoricoVoo(dados.dataDecolagem(), dados.latitudeInicioVoo(), dados.longitudeInicioVoo(),
                 dados.altitude());
         historicoVooRepository.save(inicioVoo);
-        List<HistoricoVoo> historicoInicioVoo = new ArrayList<>();
-        historicoInicioVoo.add(inicioVoo);
-        drone.setHistoricoVoo(historicoInicioVoo);
+        drone.getHistoricoVoo().add(inicioVoo);
         
         return new DadosDetalhamentoMissao(inicioVoo);
     }
