@@ -16,8 +16,6 @@ public record DadosCadastroDrones(
         @NotNull
         Long numeroSerie,
 
-        List<LicencaVoo> licencaVoo,
-
         @NotBlank
         String capacidadeCarga,
         @NotBlank

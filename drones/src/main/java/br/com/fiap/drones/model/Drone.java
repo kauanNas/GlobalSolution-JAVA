@@ -41,12 +41,27 @@ public class Drone {
             return horasVoo;
     }
 
-    public Drone(String nome, String modelo, Long numeroSerie, List<LicencaVoo> licencaVoo, String capacidadeCarga, String capacidadeBateria) {
+    public Drone(String nome, String modelo, Long numeroSerie, String capacidadeCarga, String capacidadeBateria) {
         this.nome = nome;
         this.modelo = modelo;
         this.numeroSerie = numeroSerie;
-        this.licencaVoo = licencaVoo;
         this.capacidadeCarga = capacidadeCarga;
         this.capacidadeBateria = capacidadeBateria;
+    }
+
+    @Override
+    public String toString() {
+        return "Drone{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", numeroSerie=" + numeroSerie +
+                ", licencaVoo=" + licencaVoo +
+                ", historicoVoo=" + historicoVoo +
+                ", horasVoo=" + horasVoo +
+                ", capacidadeCarga='" + capacidadeCarga + '\'' +
+                ", capacidadeBateria='" + capacidadeBateria + '\'' +
+                ", telemetrias=" + telemetrias +
+                '}';
     }
 }

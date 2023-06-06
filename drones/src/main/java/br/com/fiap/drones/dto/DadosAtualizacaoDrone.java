@@ -13,9 +13,6 @@ public record DadosAtualizacaoDrone(
                                     String nome,
                                     String modelo,
                                     Long numeroSerie,
-                                    List<LicencaVoo> licencaVoo,
-                                    List<HistoricoVoo> historicoVoo,
                                     String capacidadeCarga,
-                                    String capacidadeBateria,
-                                    List<Telemetria> telemetrias) {
+                                    String capacidadeBateria) {
 }

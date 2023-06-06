@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record DadosDetalhamentoDrone(Long id,
+                                     String nome,
                                      String modelo,
                                      Long numeroSerie,
                                      List<LicencaVoo> licencaVoo,
@@ -20,7 +21,7 @@ public record DadosDetalhamentoDrone(Long id,
                                      List<Telemetria> telemetrias) {
 
     public DadosDetalhamentoDrone(Drone drone){
-        this(drone.getId(), drone.getModelo(), drone.getNumeroSerie(), drone.getLicencaVoo(), drone.getHistoricoVoo(), drone.getHorasVoo(),
+        this(drone.getId(), drone.getNome(), drone.getModelo(), drone.getNumeroSerie(), drone.getLicencaVoo(), drone.getHistoricoVoo(), drone.getHorasVoo(),
                 drone.getCapacidadeCarga(), drone.getCapacidadeBateria(), drone.getTelemetrias());
     }
 

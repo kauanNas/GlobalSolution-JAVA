@@ -10,52 +10,69 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/drones")
-@PreAuthorize("hasAnyRole('drone-admin')")
+//@PreAuthorize("hasAnyRole('drone-admin')")
 public class DroneController {
 
     @Autowired
 
     private DroneService service;
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroDrones dados, UriComponentsBuilder uriBuilder){
+    @PostMapping("/cadastrar")
+    public ModelAndView cadastrar(@Valid DadosCadastroDrones dados, UriComponentsBuilder uriBuilder){
         var dto = service.adicionarDrone(dados);
         var uri = uriBuilder.path("/drones/{id}").buildAndExpand(dto.id()).toUri();
-        return ResponseEntity.created(uri).body(dto);
+        ModelAndView modelAndView = new ModelAndView("redireciona");
+        modelAndView.addObject("drones", dto);
+        return modelAndView;
     }
 
-    @GetMapping
-    public ResponseEntity listar(@PageableDefault(size = 10) Pageable paginacao){
+    @GetMapping("/home")
+    public ModelAndView paginaCadastro(){
+        ModelAndView modelAndView = new ModelAndView("cadastro");
+        return modelAndView;
+    }
+
+    @GetMapping("/listar")
+    public ModelAndView listar(@PageableDefault(size = 10) Pageable paginacao){
+        ModelAndView modelAndView = new ModelAndView("lista");
         var dto = service.buscarDrone(paginacao);
-        return ResponseEntity.ok(dto);
+        modelAndView.addObject("drones", dto);
+        return modelAndView;
     }
 
-    @PutMapping
-    @Transactional
-    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoDrone dados){
-        var dto = service.editarDrone(dados);
-        return ResponseEntity.ok(dto);
+    @PostMapping("/atualizar/{id}")
+    public ModelAndView atualizar(@PathVariable("id") long id, @ModelAttribute("dados")  @Valid DadosAtualizacaoDrone dados) {
+        var dto = service.editarDrone(id, dados);
+        ModelAndView modelAndView = new ModelAndView("altera");
+        modelAndView.addObject("drones", dto);
+        return modelAndView;
     }
 
-    @DeleteMapping("/{id}")
+
+
+    @GetMapping("/editar/{id}")
+    public ModelAndView redirecionaParaEdita(@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("edita");
+        var drone = service.findDroneById(id);
+        modelAndView.addObject(drone);
+        return modelAndView;
+    }
+
+    @DeleteMapping("/excluir/{id}")
     @Transactional
-    public ResponseEntity excluir(@PathVariable Long id){
+    public ModelAndView excluir(@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("lista");
         service.removerDrone(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity detalhar(@PathVariable Long id){
-        var dto = service.especificarDrone(id);
-        return ResponseEntity.ok(dto);
+        return modelAndView;
     }
 
     @PostMapping("/{id}")

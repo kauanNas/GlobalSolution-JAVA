@@ -50,4 +50,19 @@ public class HistoricoVoo {
         this.altitude = altitude;
     }
 
+    @Override
+    public String toString() {
+        return "HistoricoVoo{" +
+                "id=" + id +
+                ", dataDecolagem=" + dataDecolagem +
+                ", dataAterrisagem=" + dataAterrisagem +
+                ", duracaoMinutos=" + duracaoMinutos +
+                ", latitudeInicioVoo=" + latitudeInicioVoo +
+                ", longitudeInicioVoo=" + longitudeInicioVoo +
+                ", latitudeFimVoo=" + latitudeFimVoo +
+                ", longitudeFimVoo=" + longitudeFimVoo +
+                ", altitude=" + altitude +
+                ", velocidadeMedia=" + velocidadeMedia +
+                '}';
+    }
 }

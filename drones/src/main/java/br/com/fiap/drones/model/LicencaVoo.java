@@ -28,4 +28,14 @@ public class LicencaVoo {
         this.dataEmissao = dataEmissao;
         this.validade = validade;
     }
+
+    @Override
+    public String toString() {
+        return "LicencaVoo{" +
+                "numeroLicenca=" + numeroLicenca +
+                ", dataEmissao=" + dataEmissao +
+                ", validade=" + validade +
+                '}';
+    }
+
 }

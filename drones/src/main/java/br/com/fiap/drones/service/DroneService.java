@@ -25,7 +25,7 @@ public class DroneService {
 
 
     public DadosDetalhamentoDrone adicionarDrone(DadosCadastroDrones dados) {
-        var drone = new Drone(dados.nome(), dados.modelo(), dados.numeroSerie(), dados.licencaVoo(),
+        var drone = new Drone(dados.nome(), dados.modelo(), dados.numeroSerie(),
                 dados.capacidadeCarga(), dados.capacidadeBateria());
         droneRepository.save(drone);
         return new DadosDetalhamentoDrone(drone);
@@ -36,8 +36,8 @@ public class DroneService {
         return page;
     }
 
-    public DadosDetalhamentoDrone editarDrone(DadosAtualizacaoDrone dados) {
-        var drone = droneRepository.getReferenceById(dados.id());
+    public DadosDetalhamentoDrone editarDrone(Long id, DadosAtualizacaoDrone dados) {
+        var drone = droneRepository.getReferenceById(id);
         Drone droneEditado = drone;
 
         if (dados.nome() != null) {
@@ -52,14 +52,6 @@ public class DroneService {
             droneEditado.setNumeroSerie(dados.numeroSerie());
         }
 
-        if (dados.licencaVoo() != null) {
-            droneEditado.setLicencaVoo(dados.licencaVoo());
-        }
-
-        if (dados.historicoVoo() != null) {
-            droneEditado.setHistoricoVoo(dados.historicoVoo());
-        }
-
         if (dados.capacidadeCarga() != null) {
             droneEditado.setCapacidadeCarga(dados.capacidadeCarga());
         }
@@ -68,11 +60,7 @@ public class DroneService {
             droneEditado.setCapacidadeBateria(dados.capacidadeBateria());
         }
 
-        if (dados.telemetrias() != null) {
-            droneEditado.setTelemetrias(dados.telemetrias());
-        }
-
-
+        droneRepository.save(droneEditado);
         return new DadosDetalhamentoDrone(droneEditado);
     }
 
@@ -80,10 +68,6 @@ public class DroneService {
         droneRepository.deleteById(id);
     }
 
-    public DadosDetalhamentoDrone especificarDrone(Long id){
-        var drone = droneRepository.getReferenceById(id);
-        return new DadosDetalhamentoDrone(drone);
-    }
 
     public DadosDetalhamentoDrone adicionarLicencaDrone(DadosCadastroLicenca dados, Long id) {
         var drone = droneRepository.getReferenceById(id);
@@ -95,4 +79,7 @@ public class DroneService {
         return new DadosDetalhamentoDrone(drone);
     }
 
+    public Drone findDroneById(Long id) {
+        return droneRepository.getReferenceById(id);
+    }
 }

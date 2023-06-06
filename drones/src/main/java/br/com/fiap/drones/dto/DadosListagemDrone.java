@@ -8,6 +8,7 @@ import br.com.fiap.drones.model.Telemetria;
 import java.util.List;
 
 public record DadosListagemDrone(Long id,
+                                 String nome,
                                  String modelo,
                                  Long numeroSerie,
                                  List<LicencaVoo> licencaVoo,
@@ -18,7 +19,7 @@ public record DadosListagemDrone(Long id,
                                  List<Telemetria> telemetrias) {
 
     public DadosListagemDrone(Drone drone){
-        this(drone.getId(), drone.getModelo(), drone.getNumeroSerie(), drone.getLicencaVoo(), drone.getHistoricoVoo(), drone.getHorasVoo(),
+        this(drone.getId(), drone.getNome(), drone.getModelo(), drone.getNumeroSerie(), drone.getLicencaVoo(), drone.getHistoricoVoo(), drone.getHorasVoo(),
                 drone.getCapacidadeCarga(), drone.getCapacidadeBateria(), drone.getTelemetrias());
     }
 

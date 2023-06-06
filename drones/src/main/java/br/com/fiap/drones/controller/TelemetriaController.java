@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -20,14 +20,14 @@ public class TelemetriaController {
 
     @PostMapping("/{idDrone}")
     @Transactional
-    @PreAuthorize("hasAnyRole('drone-seed')")
+//    @PreAuthorize("hasAnyRole('drone-seed')")
     public ResponseEntity receberTelemetria(@RequestBody DadosRecebimentoTelemetria dados, @PathVariable Long idDrone){
         service.salvarTelemetria(dados, idDrone);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{idDrone}")
-    @PreAuthorize("hasAnyRole('telemetria-reader')")
+//    @PreAuthorize("hasAnyRole('telemetria-reader')")
     public ResponseEntity devolverTelemetria(@PathVariable Long idDrone){
         var dto = service.buscarTelemetria(idDrone);
         return ResponseEntity.ok(dto);
