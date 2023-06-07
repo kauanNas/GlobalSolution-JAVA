@@ -6,3 +6,14 @@
 iniciar voo e finalizar voo também são feitas por lá, gerando o histórico.
 
 - As configurações de autenticação estão no código dentro do pacote infra e as roles nos respectivos controllers, entretanto estão comentados, pois estava bugando na hr de autenticar. 
+
+Integrantes:
+
+Felipe Eiji
+Rm87399
+
+Kauan Nascimento
+Rm87318
+
+Vitor Francisco
+Rm88930
